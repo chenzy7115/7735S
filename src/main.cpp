@@ -18,14 +18,6 @@ static lv_color_t buf[ screenWidth * 10 ];
 
 TFT_eSPI tft = TFT_eSPI(screenWidth, screenHeight); /* TFT instance */
 
-#if LV_USE_LOG != 0
-/* Serial debugging */
-void my_print(const char * buf)
-{
-    Serial.printf(buf);
-    Serial.flush();
-}
-#endif
 
 /* Display flushing */
 void my_disp_flush( lv_disp_drv_t *disp, const lv_area_t *area, lv_color_t *color_p )
@@ -58,13 +50,7 @@ void setup()
 #endif
 
     tft.begin();          /* TFT init */
-    tft.setRotation( 2 ); /* Landscape orientation, flipped */
-
-    /*Set the touchscreen calibration data,
-     the actual data for your display can be acquired using
-     the Generic -> Touch_calibrate example from the TFT_eSPI library*/
-    // uint16_t calData[5] = { 275, 3620, 264, 3532, 1 };
-    // tft.setTouch( calData );
+    tft.setRotation( 2 ); /* Landscape orientation, flipped 设置屏幕翻转，0、1、2、3分别代表不同的方向 */
 
     lv_disp_draw_buf_init( &draw_buf, buf, NULL, screenWidth * 10 );
 
@@ -78,32 +64,13 @@ void setup()
     disp_drv.draw_buf = &draw_buf;
     lv_disp_drv_register( &disp_drv );
 
-    /*Initialize the (dummy) input device driver*/
-    // static lv_indev_drv_t indev_drv;
-    // lv_indev_drv_init( &indev_drv );
-    // indev_drv.type = LV_INDEV_TYPE_POINTER;
-    // indev_drv.read_cb = my_touchpad_read;
-    // lv_indev_drv_register( &indev_drv );
 
-#if 1
+
     /* Create simple label */
     lv_obj_t *label = lv_label_create( lv_scr_act() );
     lv_label_set_text( label, LVGL_Arduino.c_str() );
     lv_obj_align( label, LV_ALIGN_CENTER, 0, 0 );
-#else
-    /* Try an example from the lv_examples Arduino library
-       make sure to include it as written above.
-    lv_example_btn_1();
-   */
 
-    // uncomment one of these demos
-    lv_demo_widgets();            // OK
-    // lv_demo_benchmark();          // OK
-    // lv_demo_keypad_encoder();     // works, but I haven't an encoder
-    // lv_demo_music();              // NOK
-    // lv_demo_printer();
-    // lv_demo_stress();             // seems to be OK
-#endif
     Serial.println( "Setup done" );
 }
 
