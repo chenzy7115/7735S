@@ -1,6 +1,7 @@
 #include<Arduino.h>
 #include <lvgl.h>
 #include <TFT_eSPI.h>
+#include <ui.h>
 /*If you want to use the LVGL examples,
   make sure to install the lv_examples Arduino library
   and uncomment the following line.
@@ -67,10 +68,10 @@ void setup()
 
 
     /* Create simple label */
-    lv_obj_t *label = lv_label_create( lv_scr_act() );
-    lv_label_set_text( label, LVGL_Arduino.c_str() );
-    lv_obj_align( label, LV_ALIGN_CENTER, 0, 0 );
-
+    // lv_obj_t *label = lv_label_create( lv_scr_act() );
+    // lv_label_set_text( label, LVGL_Arduino.c_str() );
+    // lv_obj_align( label, LV_ALIGN_CENTER, 0, 0 );
+    ui_init();
     Serial.println( "Setup done" );
 }
 
