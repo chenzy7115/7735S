@@ -2,13 +2,6 @@
 #include <lvgl.h>
 #include <TFT_eSPI.h>
 #include <ui.h>
-/*If you want to use the LVGL examples,
-  make sure to install the lv_examples Arduino library
-  and uncomment the following line.
-#include <lv_examples.h>
-*/
-
-
 
 /*Change to your screen resolution*/
 static const uint16_t screenWidth  = 128;
